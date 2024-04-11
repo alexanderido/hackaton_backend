@@ -9,6 +9,11 @@ class Tag extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'icon'
+
+    ];
     public function destination()
     {
         return $this->belongsToMany(Destination::class);

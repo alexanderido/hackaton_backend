@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Requests\StoreTagsRequest;
 use App\Models\Tag;
 use Illuminate\Http\Request;
+use App\Http\Resources\TagsCollection;
 
 class TagController
 {
@@ -12,15 +14,21 @@ class TagController
      */
     public function index()
     {
-        //
+        return new TagsCollection(Tag::all());
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreTagsRequest $request)
     {
-        //
+
+        $tag = Tag::create([
+            'name' => $request->name,
+            'icon' => $request->file('icon')->store('icons', 'public')
+        ]);
+
+        return response()->json($tag, 201);
     }
 
     /**
@@ -28,22 +36,18 @@ class TagController
      */
     public function show(Tag $tag)
     {
-        //
+
+        return response()->json($tag);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Tag $tag)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+
+        return response()->json(null, 204);
     }
 }
