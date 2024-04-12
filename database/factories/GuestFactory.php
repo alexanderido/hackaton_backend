@@ -18,10 +18,11 @@ class GuestFactory extends Factory
     {
 
         return [
-            'user_id' => \App\Models\User::all()->random()->id,
+            'profile_id' => \App\Models\Profile::all()->random()->id,
             'name' => $this->faker->name(),
             'nationality' => $this->faker->country(),
             'date_of_birth' => $this->faker->date(),
+
 
         ];
     }

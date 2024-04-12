@@ -18,4 +18,9 @@ class Profile extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function guests()
+    {
+        return $this->hasMany(Guest::class);
+    }
 }

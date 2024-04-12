@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('profile_id');
             $table->string('name');
             $table->string('nationality');
             $table->date('date_of_birth');
@@ -22,9 +22,9 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreign('user_id')
+            $table->foreign('profile_id')
                 ->references('id')
-                ->on('users')
+                ->on('profiles')
                 ->onDelete('cascade');
         });
     }

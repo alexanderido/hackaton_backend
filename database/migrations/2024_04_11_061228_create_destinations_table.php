@@ -17,6 +17,13 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->string('location');
+            $table->string('address');
+            $table->string('phone_number');
+            $table->string('cover');
+            $table->string('logo');
+            $table->string('city');
+            $table->string('state');
+            $table->string('country');
             $table->string('type');
             $table->string('category');
             $table->string('status');

@@ -7,12 +7,14 @@ import InputError from '@/Components/InputError.vue';
 import InputLabel from '@/Components/InputLabel.vue';
 import PrimaryButton from '@/Components/PrimaryButton.vue';
 import TextInput from '@/Components/TextInput.vue';
+import Select from '@/Components/Select.vue';
 
 const form = useForm({
     name: '',
     email: '',
     password: '',
     password_confirmation: '',
+    role: '',
     terms: false,
 });
 
@@ -78,6 +80,22 @@ const submit = () => {
                     id="password_confirmation"
                     v-model="form.password_confirmation"
                     type="password"
+                    class="mt-1 block w-full"
+                    required
+                    autocomplete="new-password"
+                />
+                <InputError class="mt-2" :message="form.errors.password_confirmation" />
+            </div>
+            <div class="mt-4">
+                <InputLabel for="role" value="Role" />
+                <Select
+                    id="password_confirmation"
+                    v-model="form.role"
+                    :options="[
+                        { value: 'admin', text: 'Admin' },
+                        { value: 'agency', text: 'Agency' },
+                        { value: 'user', text: 'User' },
+                    ]"
                     class="mt-1 block w-full"
                     required
                     autocomplete="new-password"

@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Destination;
 use Illuminate\Http\Request;
+use App\Http\Resources\DestinationsCollection;
+use App\Http\Resources\DestinationResource;
 
 class DestinationController
 {
@@ -12,7 +14,8 @@ class DestinationController
      */
     public function index()
     {
-        //
+        //return new AgenciesCollection(Agency::all());
+        return new DestinationsCollection(Destination::all());
     }
 
     /**
@@ -28,7 +31,8 @@ class DestinationController
      */
     public function show(Destination $destination)
     {
-        //
+        $destination = Destination::find($destination->id);
+        return new DestinationResource($destination);
     }
 
     /**

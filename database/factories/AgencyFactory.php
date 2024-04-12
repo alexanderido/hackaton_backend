@@ -25,6 +25,9 @@ class AgencyFactory extends Factory
             'address' => ucfirst(fake()->address()),
             'email' => ucfirst(fake()->email()),
             'bank_account' => '888777-113',
+            'bio' => ucfirst(fake()->sentence()),
+            'cover' => 'https://via.placeholder.com/1000',
+            'logo' => 'https://via.placeholder.com/150',
 
         ];
     }

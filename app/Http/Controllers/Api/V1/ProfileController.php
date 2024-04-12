@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Resources\ProfileResource;
+use App\Http\Resources\ProfilesCollection;
 use App\Models\Profile;
 use Illuminate\Http\Request;
 
@@ -12,9 +14,7 @@ class ProfileController
      */
     public function index()
     {
-        //
-        //return all profiles paginated
-        return Profile::paginate(20);
+        return new ProfilesCollection(Profile::all());
     }
 
     /**
@@ -30,7 +30,8 @@ class ProfileController
      */
     public function show(Profile $profile)
     {
-        //
+        $profile = Profile::find($profile->id);
+        return new ProfileResource($profile);
     }
 
     /**

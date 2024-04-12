@@ -16,6 +16,9 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('name_juridical');
+            $table->string('cover');
+            $table->string('bio');
+            $table->string('logo');
             $table->string('cedula');
             $table->string('phone_number');
             $table->string('address');

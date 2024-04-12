@@ -20,8 +20,6 @@ return new class extends Migration
             $table->string('photo');
 
             $table->timestamps();
-
-
             $table->foreign('user_id')
                 ->references('id')
                 ->on('users')

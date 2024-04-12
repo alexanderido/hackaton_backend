@@ -46,9 +46,7 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $appends = [
-        'profile_photo_url',
-    ];
+
 
     /**
      * Get the attributes that should be cast.
@@ -65,11 +63,16 @@ class User extends Authenticatable
 
     public function agency()
     {
-        return $this->hasOne(Agency::class);
+        if ($this->role == 'agency') {
+            return $this->hasOne(Agency::class);
+        }
     }
 
     public function profile()
     {
-        return $this->hasOne(Profile::class);
+        if ($this->role == 'user') {
+
+            return $this->hasOne(Profile::class);
+        }
     }
 }

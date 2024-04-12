@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Agency;
 use Illuminate\Http\Request;
+use App\Http\Resources\AgenciesCollection;
+use App\Http\Resources\AgencyResource;
 
 class AgencyController
 {
@@ -12,7 +14,7 @@ class AgencyController
      */
     public function index()
     {
-        //
+        return new AgenciesCollection(Agency::all());
     }
 
     /**
@@ -20,7 +22,6 @@ class AgencyController
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -28,7 +29,8 @@ class AgencyController
      */
     public function show(Agency $agency)
     {
-        //
+        $agency = Agency::find($agency->id);
+        return new AgencyResource($agency);
     }
 
     /**
