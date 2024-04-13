@@ -8,7 +8,7 @@ use App\Http\Controllers\Api\V1\TagController;
 use App\Http\Controllers\Api\V1\DestinationController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\LoginController;
-
+use App\Http\Controllers\Api\V1\GuestController;
 
 Route::prefix('v1')->group(function () {
 
@@ -24,5 +24,10 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('agencies', AgencyController::class);
         Route::apiResource('destinations', DestinationController::class);
         Route::apiResource('profiles', ProfileController::class);
+
+        Route::get('profiles/{profile_id}/guests', [ProfileController::class, 'getGuestsByProfileId']);
+        Route::get('profiles/{profile_id}/guests/{id}', [ProfileController::class, 'getGuestsById']);
+
+        // Route::get('guests/{profile_id}', [GuestController::class, 'indexById']);
     });
 });

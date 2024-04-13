@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Profile;
+use App\Models\Guest;
 use App\Http\Requests\StoreProfileRequest;
 use App\Http\Requests\UpdateProfileRequest;
+use App\Http\Resources\GuestResource;
+use App\Http\Resources\GuestsCollection;
 use App\Http\Resources\ProfileResource;
 use App\Http\Resources\ProfilesCollection;
 use Symfony\Component\HttpFoundation\Response;
@@ -69,9 +72,26 @@ class ProfileController
      */
     public function destroy(Profile $profile)
     {
-
-
         $profile->delete();
         return response()->json(null, 204);
+    }
+
+    public function getGuestsByProfileId(Request $request)
+    {
+
+        $guest = Guest::where('profile_id', $request->profile_id)->get();
+
+        return new GuestsCollection($guest);
+    }
+
+    public function getGuestsById(Request $request)
+    {
+
+
+        $guest = Guest::where('profile_id', $request->profile_id)
+            ->where('id', $request->id)
+            ->first();
+
+        return new GuestResource($guest);
     }
 }

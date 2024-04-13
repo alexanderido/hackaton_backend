@@ -4,15 +4,18 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Guest;
 use Illuminate\Http\Request;
+use App\Http\Resources\GuestResource;
 
 class GuestController
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function indexById(Request $request)
     {
-        //
+        //get guest by profile id
+        $guest = Guest::where('profile_id', $request->profile_id)->get();
+        return GuestResource::collection($guest);
     }
 
     /**

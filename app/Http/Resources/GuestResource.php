@@ -14,14 +14,15 @@ class GuestResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+
+
         $tags = $this->tags->map(function ($tag) {
             return [
                 'id' => $tag->id,
                 'name' => $tag->name,
+                'icon' => $tag->icon,
             ];
         });
-
-
 
         return [
             'id' => $this->id,
@@ -30,8 +31,6 @@ class GuestResource extends JsonResource
             'nationality' => $this->nationality,
             'date_of_birth' => $this->date_of_birth,
             'tags' => $tags
-
-
         ];
     }
 }

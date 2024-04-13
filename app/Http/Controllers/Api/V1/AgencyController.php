@@ -6,6 +6,7 @@ use App\Models\Agency;
 use Illuminate\Http\Request;
 use App\Http\Resources\AgenciesCollection;
 use App\Http\Resources\AgencyResource;
+use Symfony\Component\HttpFoundation\Response;
 
 class AgencyController
 {
@@ -22,6 +23,15 @@ class AgencyController
      */
     public function store(Request $request)
     {
+        $agency = $request->user()->agency()->create($request->all());
+
+        $agency->logo = $request->file('logo')->store('agency_logo', 'public');
+        $agency->save();
+
+        $agency->cover = $request->file('cover')->store('agency_cover', 'public');
+        $agency->save();
+
+        return response()->json(new AgencyResource($agency), Response::HTTP_CREATED);
     }
 
     /**
@@ -38,7 +48,16 @@ class AgencyController
      */
     public function update(Request $request, Agency $agency)
     {
-        //
+        $agency->update($request->all());
+        if ($request->hasFile('logo')) {
+            $agency->logo = $request->file('logo')->store('agency_logo', 'public');
+            $agency->save();
+        }
+        if ($request->hasFile('cover')) {
+            $agency->cover = $request->file('cover')->store('agency_cover', 'public');
+            $agency->save();
+        }
+        return response()->json(new AgencyResource($agency), Response::HTTP_OK);
     }
 
     /**
@@ -46,6 +65,7 @@ class AgencyController
      */
     public function destroy(Agency $agency)
     {
-        //
+        $agency->delete();
+        return response()->json(null, Response::HTTP_NO_CONTENT);
     }
 }

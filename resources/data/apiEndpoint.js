@@ -92,8 +92,127 @@ export const arrendpoint = [
                 scope: "private",
             },
             {
-                endpoint: "agencies/10",
-                method: "GET",
+                endpoint: "agencies",
+                method: "POST",
+                scope: "private",
+            },
+            {
+                endpoint: "agencies/{id}",
+                method: "PUT",
+                scope: "private",
+                interface: [
+                    {
+                        name: "name",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "name_juridical",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "cover",
+                        type: "file",
+                        required: true,
+                    },
+                    {
+                        name: "bio",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "logo",
+                        type: "file",
+                        required: true,
+                    },
+                    {
+                        name: "cedula",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "phone_number",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "address",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "email",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "bank_account",
+                        type: "string",
+                        required: true,
+                    },
+                ],
+            },
+            {
+                endpoint: "agencies",
+                method: "POST",
+                scope: "private",
+                interface: [
+                    {
+                        name: "name",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "name_juridical",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "cover",
+                        type: "file",
+                        required: true,
+                    },
+                    {
+                        name: "bio",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "logo",
+                        type: "file",
+                        required: true,
+                    },
+                    {
+                        name: "cedula",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "phone_number",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "address",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "email",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "bank_account",
+                        type: "string",
+                        required: true,
+                    },
+                ],
+            },
+            {
+                endpoint: "agencies/12",
+                method: "DELETE",
                 scope: "private",
             },
         ],
@@ -184,6 +303,16 @@ export const arrendpoint = [
                         required: false,
                     },
                 ],
+            },
+            {
+                endpoint: "profiles/1/guests",
+                method: "GET",
+                scope: "private",
+            },
+            {
+                endpoint: "profiles/{id}/guests/{id}",
+                method: "GET",
+                scope: "private",
             },
         ],
     },

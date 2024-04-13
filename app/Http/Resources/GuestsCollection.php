@@ -14,6 +14,14 @@ class GuestsCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
-        return parent::toArray($request);
+        return $this->collection->map(function ($guest) {
+            return [
+                'id' => $guest->id,
+                'profile_id' => $guest->profile_id,
+                'name' => $guest->name,
+                'nationality' => $guest->nationality,
+                'date_of_birth' => $guest->date_of_birth,
+            ];
+        })->toArray();
     }
 }
