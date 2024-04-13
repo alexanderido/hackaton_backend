@@ -60,7 +60,7 @@ const trimText = (text) => {
     
                         <span class="flex-1">
                             <span class="text-yellow-500">
-                                http://api.dipledev.net/api/v1/
+                                https://api.dipledev.net/api/v1/
                             </span>
                             <span>
                                 {{ endpoint.endpoint }}
@@ -69,7 +69,7 @@ const trimText = (text) => {
                     </span>
     
                     <svg
-                        @click="copyToClipboard(`http://api.dipledev.net/api/v1/${endpoint.endpoint}`)"
+                        @click="copyToClipboard(`https://api.dipledev.net/api/v1/${endpoint.endpoint}`)"
                         class="shrink-0 h-5 w-5 transition text-gray-500 group-hover:text-white cursor-pointer"
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 20 20"
