@@ -28,7 +28,7 @@ return new class extends Migration
             $table->string('category');
             $table->string('status');
 
-            $table->integer('age_restriction');
+            $table->integer('age_restriction')->default(0);
             $table->timestamps();
 
 

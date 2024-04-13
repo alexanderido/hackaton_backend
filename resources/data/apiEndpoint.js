@@ -226,8 +226,167 @@ export const arrendpoint = [
                 scope: "private",
             },
             {
-                endpoint: "destinations/10",
+                endpoint: "destinations/{id}",
                 method: "GET",
+                scope: "private",
+            },
+            {
+                endpoint: "destinations",
+                method: "POST",
+                scope: "private",
+                interface: [
+                    {
+                        name: "name",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "description",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "location",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "cover",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "address",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "logo",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "phone_number",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "city",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "state",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "country",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "type",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "category",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "status",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "age_restriction",
+                        type: "number",
+                        required: false,
+                    },
+                ],
+            },
+            {
+                endpoint: "destinations/{id}",
+                method: "PUT",
+                scope: "private",
+                interface: [
+                    {
+                        name: "name",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "description",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "location",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "cover",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "address",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "logo",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "phone_number",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "city",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "state",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "country",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "type",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "category",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "status",
+                        type: "string",
+                        required: false,
+                    },
+                    {
+                        name: "age_restriction",
+                        type: "number",
+                        required: false,
+                    },
+                ],
+            },
+            {
+                endpoint: "destinations/{id}",
+                method: "DELETE",
                 scope: "private",
             },
         ],

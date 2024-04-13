@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api\V1;
 
+use App\Http\Requests\StoreAgenciesRequest;
 use App\Models\Agency;
 use Illuminate\Http\Request;
 use App\Http\Resources\AgenciesCollection;
@@ -21,7 +22,7 @@ class AgencyController
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAgenciesRequest $request)
     {
         $agency = $request->user()->agency()->create($request->all());
 

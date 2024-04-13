@@ -9,6 +9,24 @@ class Destination extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'name',
+        'description',
+        'location',
+        'address',
+        'phone_number',
+        'cover',
+        'logo',
+        'city',
+        'country',
+        'state',
+        'type',
+        'category',
+        'status',
+        'age_restriction',
+        'agency_id',
+    ];
+
     public function agency()
     {
         return $this->belongsTo(Agency::class);

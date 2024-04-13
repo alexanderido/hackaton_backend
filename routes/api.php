@@ -27,7 +27,5 @@ Route::prefix('v1')->group(function () {
 
         Route::get('profiles/{profile_id}/guests', [ProfileController::class, 'getGuestsByProfileId']);
         Route::get('profiles/{profile_id}/guests/{id}', [ProfileController::class, 'getGuestsById']);
-
-        // Route::get('guests/{profile_id}', [GuestController::class, 'indexById']);
     });
 });
