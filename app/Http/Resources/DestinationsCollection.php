@@ -18,19 +18,12 @@ class DestinationsCollection extends ResourceCollection
             return [
                 'id' => $destination->id,
                 'name' => $destination->name,
-                'description' => $destination->description,
-                'location' => $destination->location,
-                'address' => $destination->address,
-                'phone_number' => $destination->phone_number,
                 'cover' => $destination->cover,
                 'logo' => $destination->logo,
-                'city' => $destination->city,
-                'country' => $destination->country,
-                'state' => $destination->state,
                 'type' => $destination->type,
                 'category' => $destination->category,
-                'status' => $destination->status,
                 'age_restriction' => $destination->age_restriction,
+
             ];
         })->toArray();
     }

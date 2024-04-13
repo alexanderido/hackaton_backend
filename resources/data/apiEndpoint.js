@@ -104,6 +104,11 @@ export const arrendpoint = [
                 scope: "private",
             },
             {
+                endpoint: "agencies/{id}",
+                method: "GET",
+                scope: "private",
+            },
+            {
                 endpoint: "agencies",
                 method: "POST",
                 scope: "private",
