@@ -11,6 +11,10 @@ const copyToClipboard = (element) => {
     document.execCommand("copy");
     document.body.removeChild(el);
 };
+
+const trimText = (text) => {
+    return text.replace(/(\r\n|\n|\r)/gm, "ww");
+};
 </script>
 
 <template>
@@ -29,11 +33,27 @@ const copyToClipboard = (element) => {
                     v-for="endpoint in item.endpoints"
                     :key="endpoint"
                     :element="endpoint"
-                    class="flex flex-row gap-2 py-4 "
+                    class="grid grid-cols-12 gap-2 py-4  bg-gray-100 rounded-lg"
                     >
-                        <div class="text-sm w-1/12  inline-flex text-left items-center space-x-4 bg-green-600 text-white rounded-lg p-4 pl-6">{{ endpoint.method }}</div>
+                      
+                        <div v-if="endpoint.method == 'GET'" class="text-sm col-span-2 inline-flex text-left items-center space-x-4 bg-green-600 text-white rounded-lg p-4 pl-6">
+                            {{ endpoint.method }}
+                            <span class="bg-white ml-4 text-gray-900 rounded-full px-2 py-1">{{ endpoint.scope }}</span>
+                        </div>
+                        <div v-if="endpoint.method == 'PUT'" class="text-sm col-span-2 inline-flex text-left items-center space-x-4 bg-yellow-600 text-white rounded-lg p-4 pl-6">
+                            {{ endpoint.method }}
+                            <span class="bg-white ml-4 text-gray-900 rounded-full px-2 py-1">{{ endpoint.scope }}</span>
+                        </div>
+                        <div v-if="endpoint.method == 'POST'" class="text-sm col-span-2 inline-flex text-left items-center space-x-4 bg-blue-600 text-white rounded-lg p-4 pl-6">
+                            {{ endpoint.method }}
+                            <span class="bg-white ml-4 text-gray-900 rounded-full px-2 py-1">{{ endpoint.scope }}</span>
+                        </div>
+                        <div v-if="endpoint.method == 'DELETE'" class="text-sm col-span-2 inline-flex text-left items-center space-x-4 bg-red-600 text-white rounded-lg p-4 pl-6">
+                            {{ endpoint.method }}
+                            <span class="bg-white ml-4 text-gray-900 rounded-full px-2 py-1">{{ endpoint.scope }}</span>
+                        </div>
                         <code
-                    class="text-sm w-11/12 sm:text-base inline-flex text-left items-center space-x-4 bg-gray-800 text-white rounded-lg p-4 pl-6"
+                    class="text-sm col-span-10 sm:text-base inline-flex text-left items-center space-x-4 bg-gray-800 text-white rounded-lg p-4 pl-6"
                 >
                     <span class="flex gap-4">
                      
@@ -61,7 +81,17 @@ const copyToClipboard = (element) => {
                             d="M3 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v6h-4.586l1.293-1.293a1 1 0 00-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L10.414 13H15v3a2 2 0 01-2 2H5a2 2 0 01-2-2V5zM15 11h2a1 1 0 110 2h-2v-2z"
                         ></path>
                     </svg>
-                </code>
+                        </code>
+                     <details v-if="endpoint.interface" class="col-span-12">
+                        <summary >Interfaces</summary>
+                    <div >
+                        <pre class=" bg-black flex flex-col">
+                            <span v-for="data in endpoint.interface" class="text-left text-white inline" :key="data.name">{{`${data.name}: ${data.type} ${data.required==true ? 'required' : 'optional'}` }}</span>
+                           </pre>
+                    </div>
+
+                     </details>
+                     
                     </div>
                 </div>
                </div>

@@ -63,16 +63,11 @@ class User extends Authenticatable
 
     public function agency()
     {
-        if ($this->role == 'agency') {
-            return $this->hasOne(Agency::class);
-        }
+        return $this->hasOne(Agency::class);
     }
 
     public function profile()
     {
-        if ($this->role == 'user') {
-
-            return $this->hasOne(Profile::class);
-        }
+        return $this->hasOne(Profile::class);
     }
 }

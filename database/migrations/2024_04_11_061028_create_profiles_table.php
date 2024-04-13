@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('nationality');
             $table->date('date_of_birth');
-            $table->string('photo');
+            $table->string('photo')->default('profile_picture/default.jpg');
 
             $table->timestamps();
             $table->foreign('user_id')
