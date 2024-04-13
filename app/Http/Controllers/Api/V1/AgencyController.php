@@ -26,6 +26,10 @@ class AgencyController
     {
         $agency = $request->user()->agency()->create($request->all());
 
+        if ($request->user()->role !== 'agency') {
+            return response()->json(['error' => 'You are not allowed to create an agency'], Response::HTTP_FORBIDDEN);
+        }
+
         $agency->logo = $request->file('logo')->store('agency_logo', 'public');
         $agency->save();
 

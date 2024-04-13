@@ -75,6 +75,18 @@ export const arrendpoint = [
                 endpoint: "tags",
                 method: "POST",
                 scope: "private",
+                interface: [
+                    {
+                        name: "name",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "icon",
+                        type: "string",
+                        required: true,
+                    },
+                ],
             },
             {
                 endpoint: "tags/12",
@@ -388,6 +400,18 @@ export const arrendpoint = [
                 endpoint: "destinations/{id}",
                 method: "DELETE",
                 scope: "private",
+            },
+            {
+                endpoint: "destinations/{id}/tagas",
+                method: "POST",
+                scope: "private",
+                interface: [
+                    {
+                        name: "tags",
+                        type: "number[]",
+                        required: true,
+                    },
+                ],
             },
         ],
     },

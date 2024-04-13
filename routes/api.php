@@ -27,5 +27,7 @@ Route::prefix('v1')->group(function () {
 
         Route::get('profiles/{profile_id}/guests', [ProfileController::class, 'getGuestsByProfileId']);
         Route::get('profiles/{profile_id}/guests/{id}', [ProfileController::class, 'getGuestsById']);
+
+        Route::post('destinations/{destination_id}/tags', [DestinationController::class, 'addTags']);
     });
 });

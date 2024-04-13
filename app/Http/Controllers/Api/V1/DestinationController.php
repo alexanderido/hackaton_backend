@@ -101,4 +101,26 @@ class DestinationController
 
         return response()->json(null, Response::HTTP_NO_CONTENT);
     }
+
+    public function addTags(Request $request, Destination $destination)
+    {
+
+
+
+        $destination = Destination::where('id', $request->destination_id)->first();
+
+        if (empty($request->tags)) {
+            return response()->json(['message' => 'Please provide tags'], 400);
+        }
+
+        if ($destination->agency_id != $request->user()->agency->id) {
+            return response()->json(['message' => 'You are not authorized to add tags to this destination'], 403);
+        }
+
+        //clear all tags
+        $destination->tags()->detach();
+
+        $destination->tags()->attach(json_decode($request->tags));
+        return response()->json(new DestinationResource($destination), Response::HTTP_OK);
+    }
 }

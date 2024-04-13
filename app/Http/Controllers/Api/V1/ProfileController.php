@@ -29,6 +29,9 @@ class ProfileController
      */
     public function store(StoreProfileRequest $request)
     {
+        if ($request->user()->role !== 'user') {
+            return response()->json(['error' => 'You are not allowed to create an profile'], Response::HTTP_FORBIDDEN);
+        }
         $profile = $request->user()->profile()->create($request->all());
 
         $profile->photo = $request->file('photo')->store('profile_picture', 'public');
