@@ -97,4 +97,23 @@ class ProfileController
 
         return new GuestResource($guest);
     }
+
+    public function addTags(Request $request, Profile $profile)
+    {
+        $profile = Profile::where('id', $request->profile_id)->first();
+
+        if (empty($request->tags)) {
+            return response()->json(['message' => 'Please provide tags'], 400);
+        }
+
+        if ($profile->user_id != $request->user()->id) {
+            return response()->json(['message' => 'You are not authorized to add tags to this profile'], 403);
+        }
+
+        //clear all tags
+        $profile->tags()->detach();
+
+        $profile->tags()->attach(json_decode($request->tags));
+        return response()->json(new ProfileResource($profile), Response::HTTP_OK);
+    }
 }

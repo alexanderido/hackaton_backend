@@ -109,11 +109,6 @@ export const arrendpoint = [
                 scope: "private",
             },
             {
-                endpoint: "agencies",
-                method: "POST",
-                scope: "private",
-            },
-            {
                 endpoint: "agencies/{id}",
                 method: "PUT",
                 scope: "private",
@@ -493,14 +488,16 @@ export const arrendpoint = [
                 ],
             },
             {
-                endpoint: "profiles/1/guests",
-                method: "GET",
+                endpoint: "profiles/{id}/tags",
+                method: "POST",
                 scope: "private",
-            },
-            {
-                endpoint: "profiles/{id}/guests/{id}",
-                method: "GET",
-                scope: "private",
+                interface: [
+                    {
+                        name: "tags",
+                        type: "number[]",
+                        required: true,
+                    },
+                ],
             },
         ],
     },

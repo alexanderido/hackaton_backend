@@ -36,7 +36,7 @@ class ProfileResource extends JsonResource
             'date_of_birth' => $this->date_of_birth,
             'photo' => $this->photo,
             'tags' => $tags,
-            'guests' => $guests
+            //'guests' => $guests
 
 
         ];
