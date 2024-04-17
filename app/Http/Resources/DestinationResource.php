@@ -30,9 +30,7 @@ class DestinationResource extends JsonResource
         }
 
         $gallery = $this->galleries->map(function ($gallery) {
-            return [
-                $gallery->image
-            ];
+            return  $gallery->image;
         });
         return [
             'id' => $this->id,
