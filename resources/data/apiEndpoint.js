@@ -413,6 +413,23 @@ export const arrendpoint = [
                     },
                 ],
             },
+            {
+                endpoint: "destinations/{id}/prices",
+                method: "POST",
+                scope: "private",
+                interface: [
+                    {
+                        name: "date",
+                        type: "date",
+                        required: true,
+                    },
+                ],
+            },
+            {
+                endpoint: "destinations/{id}/prices",
+                method: "GET",
+                scope: "private",
+            },
         ],
     },
     {
@@ -496,6 +513,85 @@ export const arrendpoint = [
                         name: "tags",
                         type: "number[]",
                         required: true,
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        name: "Trip Requests",
+        endpoints: [
+            {
+                endpoint: "trip-request",
+                method: "POST",
+                scope: "private",
+                interface: [
+                    {
+                        name: "adults",
+                        type: "number",
+                        required: true,
+                    },
+                    {
+                        name: "children",
+                        type: "number",
+                        required: true,
+                    },
+                    {
+                        name: "pets",
+                        type: "number",
+                        required: true,
+                    },
+                    {
+                        name: "origin",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "destination",
+                        type: "json",
+                        required: false,
+                    },
+                ],
+            },
+            {
+                endpoint: "trip",
+                method: "POST",
+                scope: "private",
+                interface: [
+                    {
+                        name: "trip_request_id",
+                        type: "number",
+                        required: true,
+                    },
+                    {
+                        name: "proposal_id",
+                        type: "number",
+                        required: true,
+                    },
+                    {
+                        name: "adults",
+                        type: "number",
+                        required: true,
+                    },
+                    {
+                        name: "children",
+                        type: "number",
+                        required: true,
+                    },
+                    {
+                        name: "pets",
+                        type: "number",
+                        required: true,
+                    },
+                    {
+                        name: "origin",
+                        type: "string",
+                        required: true,
+                    },
+                    {
+                        name: "destination",
+                        type: "json",
+                        required: false,
                     },
                 ],
             },
