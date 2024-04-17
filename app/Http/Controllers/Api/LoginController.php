@@ -62,6 +62,7 @@ class LoginController extends Controller
       'id' => $user->id,
       'name' => $user->name,
       'email' => $user->email,
+      'role' => $user->role,
       'token' => $user->createToken($request->email)->plainTextToken,
     ], Response::HTTP_OK);
   }
