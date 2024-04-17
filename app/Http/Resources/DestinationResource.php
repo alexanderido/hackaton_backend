@@ -25,6 +25,10 @@ class DestinationResource extends JsonResource
             ->where('end_date', '>=', date('Y-m-d'))
             ->first();
 
+        if (!$price) {
+            $price = 'No price available for this date';
+        }
+
         $gallery = $this->galleries->map(function ($gallery) {
             return [
                 $gallery->image
