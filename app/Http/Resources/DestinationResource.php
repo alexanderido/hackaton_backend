@@ -52,7 +52,7 @@ class DestinationResource extends JsonResource
             'category' => $this->category,
             'status' => $this->status,
             'age_restriction' => $this->age_restriction,
-            'price' => $price->price,
+            'price' => $price,
             'current_date' => date('Y-m-d'),
             'gallery' => $gallery,
             'tags' => $tags,
