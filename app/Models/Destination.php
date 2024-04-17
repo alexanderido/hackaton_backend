@@ -36,4 +36,19 @@ class Destination extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function tripMeta()
+    {
+        return $this->belongsToMany(TripMeta::class);
+    }
+
+    public function proposalMeta()
+    {
+        return $this->belongsToMany(ProposalMeta::class);
+    }
+
+    public function prices()
+    {
+        return $this->hasMany(Price::class);
+    }
 }

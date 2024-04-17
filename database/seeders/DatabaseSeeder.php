@@ -14,14 +14,20 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\User::factory(1)->create([
             'name' => 'Admin',
-            'email' => 'admin@idoagency.com'
+            'email' => 'user@idoagency.com',
+            'role' => 'user',
         ]);
-        \App\Models\User::factory(120)->create();
+        \App\Models\User::factory(1)->create([
+            'name' => 'Admin',
+            'email' => 'agency@idoagency.com',
+            'role' => 'agency',
+        ]);
+
         \App\Models\Tag::factory(50)->create();
-        \App\Models\Profile::factory(100)->create();
-        \App\Models\Guest::factory(200)->create();
-        \App\Models\Agency::factory(20)->create();
-        \App\Models\Destination::factory(1000)->create();
+        \App\Models\Profile::factory(1)->create();
+
+        \App\Models\Agency::factory(1)->create();
+        \App\Models\Destination::factory(20)->create();
 
 
         $profiles = \App\Models\Profile::all();

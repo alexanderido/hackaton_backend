@@ -14,7 +14,15 @@ class DestinationsCollection extends ResourceCollection
      */
     public function toArray(Request $request): array
     {
+
+
+
         return $this->collection->map(function ($destination) {
+            $price = $destination->prices->where('start_date', '<=', date('Y-m-d'))
+                ->where('end_date', '>=', date('Y-m-d'))
+                ->first();
+
+
             return [
                 'id' => $destination->id,
                 'name' => $destination->name,
@@ -22,6 +30,7 @@ class DestinationsCollection extends ResourceCollection
                 'logo' => $destination->logo,
                 'type' => $destination->type,
                 'category' => $destination->category,
+                'price' => $price,
                 'age_restriction' => $destination->age_restriction,
 
             ];

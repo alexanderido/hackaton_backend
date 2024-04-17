@@ -123,4 +123,20 @@ class DestinationController
         $destination->tags()->attach(json_decode($request->tags));
         return response()->json(new DestinationResource($destination), Response::HTTP_OK);
     }
+
+    public function getAllPrice(Destination $destination)
+    {
+
+        return $destination->prices;
+    }
+
+    public function getPriceByDate(Request $request, Destination $destination)
+    {
+        $date = $request->date;
+
+        //get price by date how $date are between start_date and end_date
+        $price = $destination->prices->where('start_date', '<=', $date)->where('end_date', '>=', $date);
+
+        return $price;
+    }
 }

@@ -26,7 +26,7 @@ class DestinationFactory extends Factory
             'description' => fake()->text(),
             'location' => fake()->latitude() . ',' . fake()->longitude(),
             'type' => $types[random_int(0, 2)],
-            'category' => $categories[random_int(0, 6)],
+            'category' => $categories[random_int(0, 3)],
             'address' => fake()->address(),
             'phone_number' => fake()->phoneNumber(),
             'cover' => fake()->imageUrl(),

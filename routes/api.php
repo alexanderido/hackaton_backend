@@ -9,6 +9,7 @@ use App\Http\Controllers\Api\V1\DestinationController;
 use App\Http\Controllers\Api\V1\ProfileController;
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\V1\GuestController;
+use App\Http\Controllers\Api\V1\TripController;
 
 Route::prefix('v1')->group(function () {
 
@@ -30,10 +31,14 @@ Route::prefix('v1')->group(function () {
         Route::apiResource('profiles', ProfileController::class);
 
         Route::post('profiles/{profile_id}/tags', [ProfileController::class, 'addTags']);
-        /* 
-        Route::get('profiles/{profile_id}/guests', [ProfileController::class, 'getGuestsByProfileId']);
-        Route::get('profiles/{profile_id}/guests/{id}', [ProfileController::class, 'getGuestsById']); */
 
         Route::post('destinations/{destination_id}/tags', [DestinationController::class, 'addTags']);
+
+
+        Route::post('trip-request', [TripController::class, 'TripRequest']);
+        Route::post('trip', [TripController::class, 'Trip']);
+
+        Route::get('destinations/{destination}/prices', [DestinationController::class, 'getAllPrice']);
+        Route::post('destinations/{destination}/prices', [DestinationController::class, 'getPriceByDate']);
     });
 });

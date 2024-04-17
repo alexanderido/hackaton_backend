@@ -21,6 +21,9 @@ class DestinationResource extends JsonResource
             ];
         });
 
+        $price = $this->prices->where('start_date', '<=', date('Y-m-d'))
+            ->where('end_date', '>=', date('Y-m-d'))
+            ->first();
 
         return [
             'id' => $this->id,
@@ -40,6 +43,8 @@ class DestinationResource extends JsonResource
             'category' => $this->category,
             'status' => $this->status,
             'age_restriction' => $this->age_restriction,
+            'price' => $price->price,
+            'current_date' => date('Y-m-d'),
             'tags' => $tags,
         ];
     }
