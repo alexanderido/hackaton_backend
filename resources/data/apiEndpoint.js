@@ -430,6 +430,18 @@ export const arrendpoint = [
                 method: "GET",
                 scope: "private",
             },
+            {
+                endpoint: "destinations/{id}/addGallery",
+                method: "POST",
+                scope: "private",
+                interface: [
+                    {
+                        name: "images[]",
+                        type: "file[]",
+                        required: true,
+                    },
+                ],
+            },
         ],
     },
     {

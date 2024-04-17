@@ -25,6 +25,11 @@ class DestinationResource extends JsonResource
             ->where('end_date', '>=', date('Y-m-d'))
             ->first();
 
+        $gallery = $this->galleries->map(function ($gallery) {
+            return [
+                $gallery->image
+            ];
+        });
         return [
             'id' => $this->id,
             'agency_id' => $this->agency_id,
@@ -45,6 +50,7 @@ class DestinationResource extends JsonResource
             'age_restriction' => $this->age_restriction,
             'price' => $price->price,
             'current_date' => date('Y-m-d'),
+            'gallery' => $gallery,
             'tags' => $tags,
         ];
     }

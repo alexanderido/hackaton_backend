@@ -40,5 +40,6 @@ Route::prefix('v1')->group(function () {
 
         Route::get('destinations/{destination}/prices', [DestinationController::class, 'getAllPrice']);
         Route::post('destinations/{destination}/prices', [DestinationController::class, 'getPriceByDate']);
+        Route::post('destinations/{destination}/addGallery', [DestinationController::class, 'addGallery']);
     });
 });

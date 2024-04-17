@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Resources\DestinationsCollection;
 use App\Http\Resources\DestinationResource;
 use Symfony\Component\HttpFoundation\Response;
+use App\Models\Gallery;
 
 class DestinationController
 {
@@ -138,5 +139,59 @@ class DestinationController
         $price = $destination->prices->where('start_date', '<=', $date)->where('end_date', '>=', $date);
 
         return $price;
+    }
+
+    public function filterbyTag($tag_id)
+    {
+        /*      $destinations = Destination::whereHas('tags', function ($query) use ($tag_id) {
+            $query->where('tag_id', $tag_id);
+        })->get();
+
+        return new DestinationsCollection($destinations); */
+    }
+
+    public function addPrices(Request $request, Destination $destination)
+    {
+        /*   $role = $request->user()->role;
+        if ($role != 'agency') {
+            return response()->json(['message' => 'You are not authorized to add prices to a destination'], 403);
+        }
+        if ($request->user()->agency->id != $destination->agency_id) {
+            return response()->json(['message' => 'You are not authorized to add prices to this destination'], 403);
+        }
+
+        $destination = Destination::find($destination->id);
+        $destination->prices()->create($request->all());
+
+        return response()->json(new DestinationResource($destination), Response::HTTP_CREATED); */
+    }
+
+    public function addGallery(Request $request, Destination $destination)
+    {
+
+        $role = $request->user()->role;
+        if ($role != 'agency') {
+            return response()->json(['message' => 'You are not authorized to add gallery to a destination'], 403);
+        }
+        if ($request->user()->agency->id != $destination->agency_id) {
+            return response()->json(['message' => 'You are not authorized to add gallery to this destination'], 403);
+        }
+
+        $destination = Destination::find($destination->id);
+
+        //image has 1 or more images to be uploaded
+        if ($request->hasFile('images')) {
+            //  dd($request->images);
+            foreach ($request->file('images') as $image) {
+                $gallery = new Gallery();
+                $gallery->destination_id = $destination->id;
+                $gallery->image = $image->store('destination_gallery', 'public');
+                $gallery->save();
+            }
+        }
+
+
+
+        return response()->json(new DestinationResource($destination), Response::HTTP_CREATED);
     }
 }
