@@ -85,7 +85,12 @@ class TripController extends Controller
             $destination = explode(',', $destination);
             $destination = array_map('trim', $destination);
 
-            $destinationPlaces = $this->getDestinationByLocation($destination[0], $destination[1], $destination[2]);
+            if (count($destination) === 3) {
+
+                $destinationPlaces = $this->getDestinationByLocation($destination[0], $destination[1], $destination[2]);
+            } else {
+                $destinationPlaces = $this->getDestinationByLocation('', $destination[0], $destination[1]);
+            }
 
 
             $Hotels = [];
@@ -172,11 +177,18 @@ class TripController extends Controller
     public function getDestinationByLocation($city, $state, $country)
     {
 
+        if ($city === '') {
+            $destination = Destination::where('state', $state)
+                ->where('country', $country)
+                ->get();
+            return $destination;
+        } else {
 
-        $destination = Destination::where('city', $city)
-            ->where('state', $state)
-            ->where('country', $country)
-            ->get();
+            $destination = Destination::where('city', $city)
+                ->where('state', $state)
+                ->where('country', $country)
+                ->get();
+        }
 
         return $destination;
     }
