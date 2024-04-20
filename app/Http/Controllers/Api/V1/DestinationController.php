@@ -121,7 +121,7 @@ class DestinationController
         //clear all tags
         $destination->tags()->detach();
 
-        $destination->tags()->attach(json_decode($request->tags));
+        $destination->tags()->attach($request->tags);
         return response()->json(new DestinationResource($destination), Response::HTTP_OK);
     }
 
