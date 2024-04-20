@@ -33,6 +33,7 @@ class DestinationsCollection extends ResourceCollection
                 'price' => $price,
                 'country' => $destination->country,
                 'city' => $destination->city,
+                'location' => $destination->location,
                 'age_restriction' => $destination->age_restriction,
 
             ];
