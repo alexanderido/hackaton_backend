@@ -18,8 +18,10 @@ class DestinationController
      */
     public function index()
     {
-        //return new AgenciesCollection(Agency::all());
-        return new DestinationsCollection(Destination::all());
+
+        //return all destinations with pagination
+        $destinations = Destination::paginate(10);
+        return new DestinationsCollection($destinations);
     }
 
     /**
