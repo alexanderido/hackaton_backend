@@ -20,7 +20,7 @@ class DestinationController
     {
 
         //return all destinations with pagination
-        $destinations = Destination::paginate(10);
+        $destinations = Destination::limit(20)->get();
         return new DestinationsCollection($destinations);
     }
 
