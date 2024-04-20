@@ -113,7 +113,7 @@ class ProfileController
         //clear all tags
         $profile->tags()->detach();
 
-        $profile->tags()->attach(json_decode($request->tags));
+        $profile->tags()->attach($request->tags);
         return response()->json(new ProfileResource($profile), Response::HTTP_OK);
     }
 }
