@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
             'role' => 'agency',
         ]);
 
-        \App\Models\Tag::factory(50)->create();
+        \App\Models\Tag::factory(10)->create();
         \App\Models\Profile::factory(1)->create();
 
         \App\Models\Agency::factory(1)->create();
@@ -31,24 +31,20 @@ class DatabaseSeeder extends Seeder
 
 
         $profiles = \App\Models\Profile::all();
-        $guests = \App\Models\Guest::all();
+
         $destinations = \App\Models\Destination::all();
 
         $tags = \App\Models\Tag::all();
 
         foreach ($profiles as $profile) {
             $profile->tags()->attach(
-                $tags->random(rand(20, 30))
+                $tags->random(rand(1, 5))
             );
         }
-        foreach ($guests as $guest) {
-            $guest->tags()->attach(
-                $tags->random(rand(20, 30))
-            );
-        }
+
         foreach ($destinations as $destination) {
             $destination->tags()->attach(
-                $tags->random(rand(10, 20))
+                $tags->random(rand(1, 5))
             );
         }
     }

@@ -30,4 +30,19 @@ class Profile extends Model
     {
         return $this->hasMany(Guest::class);
     }
+
+    public function tripRequests()
+    {
+        return $this->hasMany(TripRequest::class);
+    }
+
+    public function proposals()
+    {
+        return $this->hasMany(Proposal::class);
+    }
+
+    public function trips()
+    {
+        return $this->hasMany(Trip::class);
+    }
 }

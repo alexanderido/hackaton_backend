@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('proposals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('trip_request_id');
-            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('profile_id');
             $table->string('status')->default('pending');
             $table->timestamps();
 
 
-            $table->foreign('user_id')
+            $table->foreign('profile_id')
                 ->references('id')
-                ->on('users')
+                ->on('profiles')
                 ->onDelete('cascade');
 
             $table->foreign('trip_request_id')

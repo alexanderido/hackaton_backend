@@ -16,8 +16,21 @@ class DestinationController
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->has('tags')) {
+            $arrTags = explode(',', $request->tags);
+
+
+
+            //get all destinations with all tags
+            $destinations = Destination::whereHas('tags', function ($query) use ($arrTags) {
+                $query->whereIn('tags.id', $arrTags);
+            })->get();
+
+            //return new DestinationsCollection($destinations);
+            return new DestinationsCollection($destinations);
+        }
 
         //return all destinations with pagination
         $destinations = Destination::limit(20)->get();
@@ -143,14 +156,11 @@ class DestinationController
         return $price;
     }
 
-    public function filterbyTag($tag_id)
+    public function filterbyTags()
     {
-        /*      $destinations = Destination::whereHas('tags', function ($query) use ($tag_id) {
-            $query->where('tag_id', $tag_id);
-        })->get();
-
-        return new DestinationsCollection($destinations); */
+        return 'asdf';
     }
+
 
     public function addPrices(Request $request, Destination $destination)
     {

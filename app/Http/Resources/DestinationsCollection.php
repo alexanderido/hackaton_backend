@@ -22,6 +22,12 @@ class DestinationsCollection extends ResourceCollection
                 ->where('end_date', '>=', date('Y-m-d'))
                 ->first();
 
+            if ($price) {
+                $price = $price->price;
+            } else {
+                $price = 0;
+            }
+
 
             return [
                 'id' => $destination->id,
@@ -35,6 +41,7 @@ class DestinationsCollection extends ResourceCollection
                 'city' => $destination->city,
                 'location' => $destination->location,
                 'age_restriction' => $destination->age_restriction,
+
 
             ];
         })->toArray();

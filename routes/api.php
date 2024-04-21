@@ -20,7 +20,6 @@ Route::prefix('v1')->group(function () {
     //protected endpoints
     Route::get('tags', [TagController::class, 'index']);
 
-    Route::get('destinations/filter/{tag_id}', [DestinationController::class, 'filterbyTag']);
     Route::apiResource('destinations', DestinationController::class, ['except' => ['store', 'delete', 'update']]);
     Route::middleware('auth:sanctum')->group(function () {
 
@@ -32,14 +31,16 @@ Route::prefix('v1')->group(function () {
 
         Route::post('profiles/{profile_id}/tags', [ProfileController::class, 'addTags']);
 
-        Route::post('destinations/{destination_id}/tags', [DestinationController::class, 'addTags']);
-
+        Route::get('profiles/{profile}/trips', [ProfileController::class, 'getMyTrips']);
+        Route::get('profiles/{profile}/trips/{trip_id}', [ProfileController::class, 'showTrip']);
 
         Route::post('trip-request', [TripController::class, 'TripRequest']);
         Route::post('trip', [TripController::class, 'Trip']);
 
+        Route::post('destinations/{destination_id}/tags', [DestinationController::class, 'addTags']);
         Route::get('destinations/{destination}/prices', [DestinationController::class, 'getAllPrice']);
         Route::post('destinations/{destination}/prices', [DestinationController::class, 'getPriceByDate']);
         Route::post('destinations/{destination}/addGallery', [DestinationController::class, 'addGallery']);
+        //  Route::get('destinations/filter/', [DestinationController::class, 'filterbyTags']);
     });
 });

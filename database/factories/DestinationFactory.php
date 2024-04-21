@@ -18,7 +18,9 @@ class DestinationFactory extends Factory
     {
         $types = ['hotel', 'restaurant', 'tour'];
         $categories = ['adventure', 'relax', 'cultural', 'gastronomic', 'romantic', 'family', 'business'];
-
+        $cityes = ['San José Province',  'Heredia Province'];
+        $states = ['San José', 'Heredia'];
+        $rnd = random_int(0, 1);
 
         return [
             'agency_id' => \App\Models\Agency::all()->random()->id,
@@ -31,9 +33,9 @@ class DestinationFactory extends Factory
             'phone_number' => fake()->phoneNumber(),
             'cover' => fake()->imageUrl(),
             'logo' => fake()->imageUrl(),
-            'city' => fake()->city(),
-            'state' => fake()->state(),
-            'country' => fake()->country(),
+            'city' =>  $cityes[$rnd],
+            'state' => $states[$rnd],
+            'country' => 'Costa Rica',
             'status' => (random_int(0, 10) === 1) ? 'closed' : 'open',
             'age_restriction' => (random_int(0, 10) === 1) ? 18 : 0,
         ];

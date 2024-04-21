@@ -4,12 +4,15 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Models\Profile;
 use App\Models\Guest;
+use App\Models\Trip;
 use App\Http\Requests\StoreProfileRequest;
 use App\Http\Requests\UpdateProfileRequest;
 use App\Http\Resources\GuestResource;
 use App\Http\Resources\GuestsCollection;
 use App\Http\Resources\ProfileResource;
 use App\Http\Resources\ProfilesCollection;
+use App\Http\Resources\TripCollection;
+use App\Http\Resources\TripResource;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\Request;
 
@@ -115,5 +118,39 @@ class ProfileController
 
         $profile->tags()->attach($request->tags);
         return response()->json(new ProfileResource($profile), Response::HTTP_OK);
+    }
+
+    public function getMyTrips(Profile $profile)
+    {
+        if ($profile->user->role !== 'user') {
+            return response()->json(['error' => 'You are not allowed to view this profile'], Response::HTTP_FORBIDDEN);
+        }
+
+        if ($profile->user_id != auth()->user()->id) {
+            return response()->json(['error' => 'You are not allowed to view this profile'], Response::HTTP_FORBIDDEN);
+        }
+
+        $trips = $profile->trips()->get();
+
+
+        return new TripCollection($trips);
+    }
+
+    public function showTrip(Request $request, Profile $profile)
+    {
+
+        if ($request->user()->role !== 'user') {
+            return response()->json(['error' => 'You are not allowed to view this trip'], Response::HTTP_FORBIDDEN);
+        }
+
+        if ($request->user()->profile->id !== $profile->id) {
+            return response()->json(['error' => 'You are not allowed to view this trip'], Response::HTTP_FORBIDDEN);
+        }
+
+        $trip = Trip::where('profile_id', $profile->id)
+            ->where('id', $request->trip_id)
+            ->first();
+
+        return new TripResource($trip);
     }
 }

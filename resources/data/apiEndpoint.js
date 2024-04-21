@@ -238,6 +238,11 @@ export const arrendpoint = [
                 scope: "private",
             },
             {
+                endpoint: "destinations/?tags=50,49",
+                method: "GET",
+                scope: "private",
+            },
+            {
                 endpoint: "destinations/{id}",
                 method: "GET",
                 scope: "private",
@@ -402,7 +407,7 @@ export const arrendpoint = [
                 scope: "private",
             },
             {
-                endpoint: "destinations/{id}/tagas",
+                endpoint: "destinations/{id}/tags",
                 method: "POST",
                 scope: "private",
                 interface: [
@@ -527,6 +532,16 @@ export const arrendpoint = [
                         required: true,
                     },
                 ],
+            },
+            {
+                endpoint: "profiles/{id}/trips",
+                method: "GET",
+                scope: "private",
+            },
+            {
+                endpoint: "profiles/{id}/trips/{trip_id}",
+                method: "GET",
+                scope: "private",
             },
         ],
     },

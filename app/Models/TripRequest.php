@@ -10,7 +10,7 @@ class TripRequest extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'profile_id',
         'adults',
         'children',
         'pets',
@@ -18,9 +18,9 @@ class TripRequest extends Model
         'status',
     ];
 
-    public function user()
+    public function profile()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Profile::class);
     }
 
     public function tripRequestMeta()

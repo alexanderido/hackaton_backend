@@ -11,13 +11,13 @@ class Proposal extends Model
 
     protected $fillable = [
         'trip_request_id',
-        'user_id',
+        'profile_id',
         'status',
     ];
 
-    public function user()
+    public function profile()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Profile::class);
     }
 
     public function tripRequest()

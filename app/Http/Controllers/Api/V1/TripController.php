@@ -32,16 +32,14 @@ class TripController extends Controller
         $origin = $request->origin;
 
         $destination = json_decode($request->destination);
-
-        //insert into trip request table
-        $tripRequest = $request->user()->tripRequests()->create([
+        //dd($request->user()->profile);
+        $tripRequest = $request->user()->profile->tripRequests()->create([
             'adults' => $adults,
             'children' => $children,
             'pets' => $pets,
             'origin' => $origin,
+            'status' => 'pending'
         ]);
-
-        //insert into trip request meta table
 
 
         foreach ($destination as $dest) {
@@ -60,7 +58,7 @@ class TripController extends Controller
         return response()->json([
             'status' => 'success',
             'trip_request_id' => $tripRequest->id,
-            'proposal_status' => $proposalSaved,
+            'proposal_id' => $proposalSaved,
             'proposals' => $proposals,
             'message' => 'Trip request submitted successfully'
         ]);
@@ -197,9 +195,9 @@ class TripController extends Controller
     {
 
 
-        $userID = App::make('auth')->user()->id;
+        $profileID = App::make('auth')->user()->profile->id;
         $proposalModel = Proposal::create([
-            'user_id' => $userID,
+            'profile_id' => $profileID,
             'trip_request_id' => $tripRequestId,
             'status' => 'pending'
         ]);
@@ -236,13 +234,14 @@ class TripController extends Controller
     {
 
 
-        $userID = App::make('auth')->user()->id;
+
+        $profileID = App::make('auth')->user()->profile->id;
         $tripRequestID = $request->trip_request_id;
         $proposalID = $request->proposal_id;
         $destinations = json_decode($request->destinations);
 
         $trip = \App\Models\Trip::create([
-            'user_id' => $userID,
+            'profile_id' => $profileID,
             'trip_request_id' => $tripRequestID,
             'proposal_id' => $proposalID,
             'origin' => $request->origin,
@@ -270,7 +269,8 @@ class TripController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Trip approved successfully'
+            'message' => 'Trip approved successfully',
+            'trip_id' => $trip->id,
 
         ]);
     }

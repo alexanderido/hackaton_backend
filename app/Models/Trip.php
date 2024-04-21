@@ -10,7 +10,7 @@ class Trip extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'profile_id',
         'proposal_id',
         'trip_request_id',
         'adults',
@@ -20,9 +20,9 @@ class Trip extends Model
         'status',
     ];
 
-    public function user()
+    public function profile()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Profile::class);
     }
 
     public function proposal()
