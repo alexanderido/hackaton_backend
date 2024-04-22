@@ -67,4 +67,9 @@ class LoginController extends Controller
       'token' => $user->createToken($request->email)->plainTextToken,
     ], Response::HTTP_OK);
   }
+  public function getUserByToken()
+  {
+    $user = auth()->user();
+    return response()->json($user);
+  }
 }

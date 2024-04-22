@@ -23,6 +23,8 @@ Route::prefix('v1')->group(function () {
     Route::apiResource('destinations', DestinationController::class, ['except' => ['store', 'delete', 'update']]);
     Route::middleware('auth:sanctum')->group(function () {
 
+        Route::get('getUserByToken', [LoginController::class, 'getUserByToken']);
+
         Route::post('logout', [LoginController::class, 'logout']);
         Route::apiResource('tags', TagController::class, ['except' => ['index']]);
         Route::apiResource('agencies', AgencyController::class);
