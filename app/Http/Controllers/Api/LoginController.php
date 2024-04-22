@@ -28,7 +28,7 @@ class LoginController extends Controller
       ], Response::HTTP_UNAUTHORIZED);
     }
 
-
+    $agency = null;
     if ($user->role == 'agency') {
       $agency = $user->agency;
     }
