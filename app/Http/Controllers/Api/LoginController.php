@@ -70,6 +70,13 @@ class LoginController extends Controller
   public function getUserByToken()
   {
     $user = auth()->user();
-    return response()->json($user);
+    $responseData = [
+      'id' => $user->id,
+      'name' => $user->name,
+      'email' => $user->email,
+      'role' => $user->role,
+      'profileId' => $user->profile->id,
+    ];
+    return response()->json($responseData);
   }
 }
