@@ -34,11 +34,16 @@ Route::prefix('v1')->group(function () {
         Route::get('profiles/{profile}/trips', [ProfileController::class, 'getMyTrips']);
         Route::get('profiles/{profile}/trips/{trip_id}', [ProfileController::class, 'showTrip']);
 
+
+        Route::get('agencies/{agency}/trips', [AgencyController::class, 'getAgencyTrips']);
+        Route::get('agencies/{agency}/trips/{trip_id}', [AgencyController::class, 'showAgencyTrip']);
+
         Route::post('trip-request', [TripController::class, 'TripRequest']);
         Route::post('trip', [TripController::class, 'Trip']);
 
         Route::post('destinations/{destination_id}/tags', [DestinationController::class, 'addTags']);
         Route::get('destinations/{destination}/prices', [DestinationController::class, 'getAllPrice']);
+        Route::post('destinations/{destination}/prices/add', [DestinationController::class, 'addPrices']);
         Route::post('destinations/{destination}/prices', [DestinationController::class, 'getPriceByDate']);
         Route::post('destinations/{destination}/addGallery', [DestinationController::class, 'addGallery']);
         //  Route::get('destinations/filter/', [DestinationController::class, 'filterbyTags']);

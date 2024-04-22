@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Requests\StoreAgenciesRequest;
 use App\Models\Agency;
+use App\Models\Trip;
 use Illuminate\Http\Request;
 use App\Http\Resources\AgenciesCollection;
 use App\Http\Resources\AgencyResource;
+use App\Models\Destination;
 use Symfony\Component\HttpFoundation\Response;
+use App\Http\Resources\DestinationResource;
 
 class AgencyController
 {
@@ -72,5 +75,75 @@ class AgencyController
     {
         $agency->delete();
         return response()->json(null, Response::HTTP_NO_CONTENT);
+    }
+
+    public function getAgencyTrips(Agency $agency)
+    {
+
+        if (auth()->user()->role !== 'agency') {
+            return response()->json(['error' => 'You are not allowed to view agency trips'], Response::HTTP_FORBIDDEN);
+        }
+
+        if ($agency->id !== auth()->user()->agency->id) {
+            return response()->json(['error' => 'You are not allowed to view agency trips'], Response::HTTP_FORBIDDEN);
+        }
+
+        $agencyID = $agency->id;
+        $allDestinations = Agency::find($agencyID)->destinations;
+
+        //in destination_trip_meta table, get all the destinations that belong to the agency
+
+        $allTrips = [];
+
+        foreach ($allDestinations as $destination) {
+
+            $tripMeta = $destination->tripMeta;
+
+            foreach ($tripMeta as $trip) {
+
+                if (!in_array($trip->trip->id, $allTrips)) {
+                    array_push($allTrips, $trip->trip->id);
+                }
+            }
+        }
+        $returnData = [];
+        foreach ($allTrips as $trip) {
+
+            $trips = Trip::find($trip);
+
+            array_push($returnData, [
+                'trip_id' => $trips->id,
+                'travel' => $trips->profile->name,
+                'trip_origin' => $trips->origin,
+            ]);
+        }
+
+        return $returnData;
+    }
+
+    public function showAgencyTrip(Request $request, Agency $agency)
+    {
+        if (auth()->user()->role !== 'agency') {
+            return response()->json(['error' => 'You are not allowed to view agency trips'], Response::HTTP_FORBIDDEN);
+        }
+
+        if ($agency->id !== auth()->user()->agency->id) {
+            return response()->json(['error' => 'You are not allowed to view agency trips'], Response::HTTP_FORBIDDEN);
+        }
+
+        $trip = Trip::find($request->trip_id);
+        $metas = $trip->metas;
+        $destinationsList = [];
+        foreach ($metas as $meta) {
+            $destinations = $meta->destinations;
+            foreach ($destinations as $destination) {
+
+                if ($destination->agency_id === $agency->id) {
+
+                    array_push($destinationsList, new DestinationResource($destination));
+                }
+            }
+        }
+        return  $destinationsList;
     }
 }

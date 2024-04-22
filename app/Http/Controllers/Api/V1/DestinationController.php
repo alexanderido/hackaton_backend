@@ -164,7 +164,7 @@ class DestinationController
 
     public function addPrices(Request $request, Destination $destination)
     {
-        /*   $role = $request->user()->role;
+        $role = $request->user()->role;
         if ($role != 'agency') {
             return response()->json(['message' => 'You are not authorized to add prices to a destination'], 403);
         }
@@ -172,10 +172,28 @@ class DestinationController
             return response()->json(['message' => 'You are not authorized to add prices to this destination'], 403);
         }
 
+        //validate if start_date is less than end_date
+        if ($request->start_date > $request->end_date) {
+            return response()->json(['message' => 'Start date cannot be greater than end date'], 400);
+        }
+
+        //validate if price is a number
+        if (!is_numeric($request->price)) {
+            return response()->json(['message' => 'Price must be a number'], 400);
+        }
+
+
         $destination = Destination::find($destination->id);
+
+        //validate if rage of dates are not overlapping with existing prices for the destination
+        $prices = $destination->prices->where('start_date', '<=', $request->start_date)->where('end_date', '>=', $request->start_date)->count();
+        if ($prices > 0) {
+            return response()->json(['message' => 'Price range overlaps with existing prices'], 400);
+        }
+
         $destination->prices()->create($request->all());
 
-        return response()->json(new DestinationResource($destination), Response::HTTP_CREATED); */
+        return response()->json(new DestinationResource($destination), Response::HTTP_CREATED);
     }
 
     public function addGallery(Request $request, Destination $destination)

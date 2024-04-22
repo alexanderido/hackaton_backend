@@ -23,11 +23,20 @@ class DestinationResource extends JsonResource
 
         $price = $this->prices->where('start_date', '<=', date('Y-m-d'))
             ->where('end_date', '>=', date('Y-m-d'))
-            ->first();
+            ->first()->price ?? null;
 
         if (!$price) {
             $price = 'No price available for this date';
         }
+
+        $priceList = $this->prices->map(function ($price) {
+            return [
+                'id' => $price->id,
+                'price' => $price->price,
+                'start_date' => $price->start_date,
+                'end_date' => $price->end_date,
+            ];
+        });
 
         $gallery = $this->galleries->map(function ($gallery) {
             return  $gallery->image;
@@ -50,7 +59,8 @@ class DestinationResource extends JsonResource
             'category' => $this->category,
             'status' => $this->status,
             'age_restriction' => $this->age_restriction,
-            'price' => $price,
+            'current_price' => $price,
+            'price_list' => $priceList,
             'current_date' => date('Y-m-d'),
             'gallery' => $gallery,
             'tags' => $tags,

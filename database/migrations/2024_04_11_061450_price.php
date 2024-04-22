@@ -17,7 +17,7 @@ return new class extends Migration
             $table->float('price');
             $table->date('start_date');
             $table->date('end_date');
-
+            $table->timestamps();
             $table->foreign('destination_id')
                 ->references('id')
                 ->on('destinations')
