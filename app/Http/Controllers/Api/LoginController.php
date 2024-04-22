@@ -29,6 +29,9 @@ class LoginController extends Controller
     }
 
 
+    if ($user->role == 'agency') {
+      $agency = $user->agency;
+    }
 
     return response()->json([
       'id' => $user->id,
@@ -36,6 +39,7 @@ class LoginController extends Controller
       'email' => $user->email,
       'token' => $user->createToken($request->email)->plainTextToken,
       'role' => $user->role,
+      'agency' => $agency,
     ], Response::HTTP_OK);
   }
 
