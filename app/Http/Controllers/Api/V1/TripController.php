@@ -245,6 +245,9 @@ class TripController extends Controller
             'trip_request_id' => $tripRequestID,
             'proposal_id' => $proposalID,
             'origin' => $request->origin,
+            'adults' => $request->adults,
+            'children' => $request->children,
+            'pets' => $request->pets,
             'status' => 'pending'
         ]);
 
